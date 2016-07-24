@@ -2,7 +2,7 @@ class Piknik < Formula
   desc "Copy/paste anything over the network"
   head "https://github.com/jedisct1/piknik.git"
   homepage "https://github.com/jedisct1/piknik"
-  sha256 "9698338ef93685755fe57fc681f6be53988f4bc5acdf715a17543e4bce97af46"
+  sha256 "05996e02ea3f2df6dcccb7aab8af18871e555ac8ed5326b6a29171bfd16c5219"
   url "https://github.com/jedisct1/piknik/archive/0.6.tar.gz"
   version "0.6"
 
