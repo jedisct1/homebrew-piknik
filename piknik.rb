@@ -2,9 +2,9 @@ class Piknik < Formula
   desc "Copy/paste anything over the network"
   head "https://github.com/jedisct1/piknik.git"
   homepage "https://github.com/jedisct1/piknik"
-  sha256 "e8e3f3819b77e493c9fae5e1dc01d019d973488e1445345e50cd4c1c936727f2"
-  url "https://github.com/jedisct1/piknik/archive/0.8.tar.gz"
-  version "0.8"
+  sha256 "4b61e78d7c2f4ddc69cffe9e800a6ca03af8e90540a089469def615388087983"
+  url "https://github.com/jedisct1/piknik/archive/0.9.tar.gz"
+  version "0.9"
 
   depends_on "go" => :build
   depends_on "godep" => :build
