@@ -30,10 +30,9 @@ class Piknik < Formula
     begin
       conffile = testpath/"testconfig.toml"
 
-      IO.popen([{}, "#{bin}/piknik", "-genkeys"]) do |genkeys|
-        lines = genkeys.readlines.grep(/\s+=\s+/).map { |x| x.gsub(/\s+/, " ").gsub(/#.*/, "") }.uniq
-        conffile.write lines.join("\n")
-      end
+      genkeys = shell_output("#{bin}/piknik -genkeys").lines
+      lines = genkeys.grep(/\s+=\s+/).map { |x| x.gsub(/\s+/, " ").gsub(/#.*/, "") }.uniq
+      conffile.write lines.join("\n")
       pid = fork do
         exec "#{bin}/piknik", "-server", "-config", conffile
       end
