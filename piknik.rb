@@ -16,8 +16,7 @@ class Piknik < Formula
     cd dir do
       system "godep", "restore"
       system "go", "build", "-o", bin/"piknik", "."
-      ln "zsh.aliases", "piknik.sh"
-      (prefix/"etc/profile.d").install "piknik.sh"
+      (prefix/"etc/profile.d").install "zsh.aliases" => "piknik.sh"
     end
   end
 
