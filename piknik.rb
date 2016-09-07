@@ -21,7 +21,7 @@ class Piknik < Formula
   end
 
   def caveats; <<-EOS.undent
-    For Bash or Zsh, put something like this in your $HOME/.bashrc or $HOME/.zshrc:
+    In order to get convenient shell aliases, put something like this in #{shell_profile}:
       source $(brew --prefix)/etc/profile.d/piknik.sh
     EOS
   end
