@@ -23,33 +23,31 @@ class Piknik < Formula
 
   def caveats; <<-EOS.undent
     In order to get convenient shell aliases, put something like this in #{shell_profile}:
-      source $(brew --prefix)/etc/profile.d/piknik.sh
+      source "$(brew --prefix)/etc/profile.d/piknik.sh"
     EOS
   end
 
   test do
-    begin
-      conffile = testpath/"testconfig.toml"
+    conffile = testpath/"testconfig.toml"
 
-      genkeys = shell_output("#{bin}/piknik -genkeys")
-      lines = genkeys.lines.grep(/\s+=\s+/).map { |x| x.gsub(/\s+/, " ").gsub(/#.*/, "") }.uniq
-      conffile.write lines.join("\n")
-      pid = fork do
-        exec "#{bin}/piknik", "-server", "-config", conffile
+    genkeys = shell_output("#{bin}/piknik -genkeys")
+    lines = genkeys.lines.grep(/\s+=\s+/).map { |x| x.gsub(/\s+/, " ").gsub(/#.*/, "") }.uniq
+    conffile.write lines.join("\n")
+    pid = fork do
+      exec "#{bin}/piknik", "-server", "-config", conffile
+    end
+    begin
+      IO.popen([{}, "#{bin}/piknik", "-config", conffile, "-copy"], "w+") do |p|
+        p.write "test"
       end
-      begin
-        IO.popen([{}, "#{bin}/piknik", "-config", conffile, "-copy"], "w+") do |p|
-          p.write "test"
-        end
-        IO.popen([{}, "#{bin}/piknik", "-config", conffile, "-move"], "r") do |p|
-          clipboard = p.read
-          assert_equal clipboard, "test"
-        end
-      ensure
-        Process.kill("TERM", pid)
-        Process.wait(pid)
-        conffile.unlink
+      IO.popen([{}, "#{bin}/piknik", "-config", conffile, "-move"], "r") do |p|
+        clipboard = p.read
+        assert_equal clipboard, "test"
       end
+    ensure
+      Process.kill("TERM", pid)
+      Process.wait(pid)
+      conffile.unlink
     end
   end
 end
