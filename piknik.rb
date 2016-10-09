@@ -5,8 +5,8 @@ class Piknik < Formula
   sha256 "4b61e78d7c2f4ddc69cffe9e800a6ca03af8e90540a089469def615388087983"
   head "https://github.com/jedisct1/piknik.git"
 
+  depends_on "glide" => :build
   depends_on "go" => :build
-  depends_on "godep" => :build
 
   def install
     ENV["GOPATH"] = buildpath
@@ -14,7 +14,7 @@ class Piknik < Formula
     dir.install Dir["*"]
     ln_s buildpath/"src", dir
     cd dir do
-      system "godep", "restore"
+      system "glide", "install"
       system "go", "build", "-o", bin/"piknik", "."
       (prefix/"etc/profile.d").install "zsh.aliases" => "piknik.sh"
       prefix.install_metafiles
