@@ -1,8 +1,8 @@
 class Piknik < Formula
   desc "Copy/paste anything over the network"
   homepage "https://github.com/jedisct1/piknik"
-  url "https://github.com/jedisct1/piknik/archive/0.9.tar.gz"
-  sha256 "4b61e78d7c2f4ddc69cffe9e800a6ca03af8e90540a089469def615388087983"
+  url "https://github.com/jedisct1/piknik/archive/0.9.1.tar.gz"
+  sha256 "a682e16d937a5487eda5b0d0889ae114e228bd3c9beddd743cad40f1bad94448"
   head "https://github.com/jedisct1/piknik.git"
 
   depends_on "glide" => :build
