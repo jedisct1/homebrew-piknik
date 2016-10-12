@@ -10,7 +10,7 @@ class Piknik < Formula
 
   def install
     ENV["GOPATH"] = buildpath
-    ENV["GLIDE_HOME"] = buildpath/".glide"
+    ENV["GLIDE_HOME"] = HOMEBREW_CACHE/"glide_home/#{name}"
     dir = buildpath/"src/github.com/jedisct1/"
     dir.install Dir["*"]
     ln_s buildpath/"src", dir
